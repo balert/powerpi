@@ -9,5 +9,6 @@ public enum Device {
     Ecklampe,
     Nachttischlampe,
     Schrank,
-    Kugel
+    Kugel,
+    Alles
 }

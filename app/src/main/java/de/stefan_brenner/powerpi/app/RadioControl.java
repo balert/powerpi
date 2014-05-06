@@ -13,11 +13,23 @@ import java.net.InetAddress;
 public class RadioControl {
 
     public boolean control(Device device, boolean state) {
-
         String sstate = state ? "1" : "0";
-        String messageStr="setsocket:"+ device.toString() + ":" + sstate;
-        new ControlTask().execute(messageStr);
-        return false;
+        if(device.equals(Device.Alles)) {
+            for(Device d : Device.values()) {
+                String messageStr = "setsocket:" + d.toString() + ":" + sstate;
+                new ControlTask().execute(messageStr);
+                try {
+                    Thread.sleep(750);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return true;
+        } else {
+            String messageStr="setsocket:"+ device.toString() + ":" + sstate;
+            new ControlTask().execute(messageStr);
+            return true;
+        }
     }
 
     class ControlTask extends AsyncTask<String, Void, Boolean> {

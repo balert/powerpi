@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PowerPi.iml" filepath="$PROJECT_DIR$/PowerPi.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/powerpi.iml" filepath="$PROJECT_DIR$/powerpi.iml" />
     </modules>
   </component>
 </project>

@@ -33,6 +33,8 @@ public class PowerPiActivity extends ActionBarActivity {
         Fragment schrank = new ControlFragment(Device.Schrank, radioControl);
         Fragment kugel = new ControlFragment(Device.Kugel, radioControl);
 
+        Fragment alles = new ControlFragment(Device.Alles, radioControl);
+
         FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
         transaction.add(R.id.fragmentContainer, nachttischlampe);
@@ -41,6 +43,7 @@ public class PowerPiActivity extends ActionBarActivity {
         transaction.add(R.id.fragmentContainer, schreibtischlampe);
         transaction.add(R.id.fragmentContainer, stehlampe);
         transaction.add(R.id.fragmentContainer, ecklampe);
+        transaction.add(R.id.fragmentContainer, alles);
         transaction.commit();
 
     }
