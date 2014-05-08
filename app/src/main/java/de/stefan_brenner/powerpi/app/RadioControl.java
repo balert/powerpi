@@ -19,7 +19,7 @@ public class RadioControl {
                 String messageStr = "setsocket:" + d.toString() + ":" + sstate;
                 new ControlTask().execute(messageStr);
                 try {
-                    Thread.sleep(750);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
