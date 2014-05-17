@@ -17,23 +17,27 @@ public class PowerPiActivity extends ActionBarActivity {
 
     private RadioControl radioControl;
 
+    public PowerPiActivity() {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_power_pi);
         //if (savedInstanceState == null) {
 
-        RadioControl radioControl = new RadioControl();
+        radioControl = new RadioControl();
 
-        Fragment schreibtischlampe = new ControlFragment(Device.Schreibtischlampe, radioControl);
-        Fragment stehlampe = new ControlFragment(Device.Stehlampe, radioControl);
-        Fragment ecklampe = new ControlFragment(Device.Ecklampe, radioControl);
+        Fragment schreibtischlampe = ControlFragment.newInstance(Device.Schreibtischlampe);
+        Fragment stehlampe = ControlFragment.newInstance(Device.Stehlampe);
+        Fragment ecklampe = ControlFragment.newInstance(Device.Ecklampe);
 
-        Fragment nachttischlampe = new ControlFragment(Device.Nachttischlampe, radioControl);
-        Fragment schrank = new ControlFragment(Device.Schrank, radioControl);
-        Fragment kugel = new ControlFragment(Device.Kugel, radioControl);
+        Fragment nachttischlampe = ControlFragment.newInstance(Device.Nachttischlampe);
+        Fragment schrank = ControlFragment.newInstance(Device.Schrank);
+        Fragment kugel = ControlFragment.newInstance(Device.Kugel);
 
-        Fragment alles = new ControlFragment(Device.Alles, radioControl);
+        Fragment alles = ControlFragment.newInstance(Device.Alles);
 
         FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
@@ -48,6 +52,9 @@ public class PowerPiActivity extends ActionBarActivity {
 
     }
 
+    public RadioControl getRadioControl() {
+        return radioControl;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,47 +76,4 @@ public class PowerPiActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class ControlFragment extends Fragment implements View.OnClickListener {
-
-        private Device device;
-        private RadioControl control;
-
-        public ControlFragment(Device device, RadioControl control) {
-            this.device = device;
-            this.control = control;
-
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_control, container, false);
-            TextView label = (TextView) rootView.findViewById(R.id.controlLabel);
-            label.setText(device.toString());
-            Button btnTurnon = (Button) rootView.findViewById(R.id.button_turnon);
-            btnTurnon.setOnClickListener(this);
-            Button btnTurnoff = (Button) rootView.findViewById(R.id.button_turnoff);
-            btnTurnoff.setOnClickListener(this);
-            return rootView;
-        }
-
-
-        @Override
-        public void onClick(View view) {
-            switch(view.getId()) {
-                case R.id.button_turnon:
-                    Log.d("PowerPi", "Turn on " + device.toString());
-                    control.control(device,true);
-                    break;
-                case R.id.button_turnoff:
-                    Log.d("PowerPi", "Turn off " + device.toString());
-                    control.control(device,false);
-                    break;
-            }
-
-        }
-    }
 }
