@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 public class PowerPiActivity extends ActionBarActivity {
 
-    private RadioControl radioControl;
-
     public PowerPiActivity() {
 
     }
@@ -25,35 +23,31 @@ public class PowerPiActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_power_pi);
-        //if (savedInstanceState == null) {
 
-        radioControl = new RadioControl();
+        if (savedInstanceState == null) {
 
-        Fragment schreibtischlampe = ControlFragment.newInstance(Device.Schreibtischlampe);
-        Fragment stehlampe = ControlFragment.newInstance(Device.Stehlampe);
-        Fragment ecklampe = ControlFragment.newInstance(Device.Ecklampe);
+            Fragment schreibtischlampe = ControlFragment.newInstance(Device.Schreibtischlampe);
+            Fragment stehlampe = ControlFragment.newInstance(Device.Stehlampe);
+            Fragment ecklampe = ControlFragment.newInstance(Device.Ecklampe);
 
-        Fragment nachttischlampe = ControlFragment.newInstance(Device.Nachttischlampe);
-        Fragment schrank = ControlFragment.newInstance(Device.Schrank);
-        Fragment kugel = ControlFragment.newInstance(Device.Kugel);
+            Fragment nachttischlampe = ControlFragment.newInstance(Device.Nachttischlampe);
+            Fragment schrank = ControlFragment.newInstance(Device.Schrank);
+            Fragment kugel = ControlFragment.newInstance(Device.Kugel);
 
-        Fragment alles = ControlFragment.newInstance(Device.Alles);
+            Fragment alles = ControlFragment.newInstance(Device.Alles);
 
-        FragmentManager fm = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.fragmentContainer, nachttischlampe);
-        transaction.add(R.id.fragmentContainer, schrank);
-        transaction.add(R.id.fragmentContainer, kugel);
-        transaction.add(R.id.fragmentContainer, schreibtischlampe);
-        transaction.add(R.id.fragmentContainer, stehlampe);
-        transaction.add(R.id.fragmentContainer, ecklampe);
-        transaction.add(R.id.fragmentContainer, alles);
-        transaction.commit();
+            FragmentManager fm = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
+            transaction.add(R.id.fragmentContainer, nachttischlampe);
+            transaction.add(R.id.fragmentContainer, schrank);
+            transaction.add(R.id.fragmentContainer, kugel);
+            transaction.add(R.id.fragmentContainer, schreibtischlampe);
+            transaction.add(R.id.fragmentContainer, stehlampe);
+            transaction.add(R.id.fragmentContainer, ecklampe);
+            transaction.add(R.id.fragmentContainer, alles);
+            transaction.commit();
 
-    }
-
-    public RadioControl getRadioControl() {
-        return radioControl;
+        }
     }
 
     @Override

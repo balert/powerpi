@@ -3,6 +3,7 @@ package de.stefan_brenner.powerpi.app;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,8 +37,9 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = getActivity();
-        control = ((PowerPiActivity) context).getRadioControl();
+        PowerPiActivity activity = (PowerPiActivity) getActivity();
+        GlobalState context = (GlobalState) activity.getApplicationContext();
+        control = context.getRadioControl();
         device = Device.valueOf(getArguments().getString(EXTRA_DEVICE));
     }
 
@@ -57,6 +59,11 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        if(control == null) {
+            System.out.println("no RadioControl");
+            return;
+        }
+
         switch(view.getId()) {
             case R.id.button_turnon:
                 Log.d("PowerPi", "Turn on " + device.toString());
