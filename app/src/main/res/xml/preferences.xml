@@ -17,6 +17,6 @@
         android:title="PowerPi objects"
         android:summary="Set your configured objects as comma-separated list of names as given in the PowerPi web interface."
         android:inputType="textNoSuggestions"
-        android:defaultValue="Schreibtischlampe, Ecklampe"
-        android:enabled="false" />
+        android:defaultValue="Schreibtischlampe, Stehlampe, Ecklampe, Nachttischlampe, Schrank, Kugel"
+        android:enabled="true" />
 </PreferenceScreen>

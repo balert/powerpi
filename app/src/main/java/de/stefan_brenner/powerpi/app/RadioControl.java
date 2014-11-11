@@ -1,6 +1,7 @@
 package de.stefan_brenner.powerpi.app;
 
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.net.DatagramPacket;
@@ -12,24 +13,13 @@ import java.net.InetAddress;
  */
 public class RadioControl {
 
-    public boolean control(Device device, boolean state) {
+    public boolean control(String device, boolean state) {
         String sstate = state ? "1" : "0";
-        if(device.equals(Device.Alles)) {
-            for(Device d : Device.values()) {
-                String messageStr = "setsocket:" + d.toString() + ":" + sstate;
-                new ControlTask().execute(messageStr);
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            return true;
-        } else {
-            String messageStr="setsocket:"+ device.toString() + ":" + sstate;
-            new ControlTask().execute(messageStr);
-            return true;
-        }
+
+        String messageStr="setsocket:"+ device + ":" + sstate;
+        new ControlTask().execute(messageStr);
+        return true;
+
     }
 
     class ControlTask extends AsyncTask<String, Void, Boolean> {

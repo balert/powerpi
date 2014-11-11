@@ -1,9 +1,7 @@
 package de.stefan_brenner.powerpi.app;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,19 +14,19 @@ import android.widget.TextView;
  */
 public class ControlFragment extends Fragment implements View.OnClickListener {
 
-    private static final String EXTRA_DEVICE = null;
+    private static final String dev = null;
 
-    private Device device;
+    private String device;
     private RadioControl control;
 
     public ControlFragment() {
     }
 
-    public static final ControlFragment newInstance(Device device) {
+    public static final ControlFragment newInstance(String device) {
         ControlFragment f = new ControlFragment();
 
         final Bundle args = new Bundle(1);
-        args.putString(EXTRA_DEVICE, device.toString());
+        args.putString(dev, device);
         f.setArguments(args);
 
         return f;
@@ -40,7 +38,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
         PowerPiActivity activity = (PowerPiActivity) getActivity();
         GlobalState context = (GlobalState) activity.getApplicationContext();
         control = context.getRadioControl();
-        device = Device.valueOf(getArguments().getString(EXTRA_DEVICE));
+        device = getArguments().getString(dev);
     }
 
     @Override
@@ -48,7 +46,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_control, container, false);
         TextView label = (TextView) rootView.findViewById(R.id.controlLabel);
-        label.setText(device.toString());
+        label.setText(device);
         Button btnTurnon = (Button) rootView.findViewById(R.id.button_turnon);
         btnTurnon.setOnClickListener(this);
         Button btnTurnoff = (Button) rootView.findViewById(R.id.button_turnoff);
@@ -66,11 +64,11 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
 
         switch(view.getId()) {
             case R.id.button_turnon:
-                Log.d("PowerPi", "Turn on " + device.toString());
+                Log.d("PowerPi", "Turn on " + device);
                 control.control(device,true);
                 break;
             case R.id.button_turnoff:
-                Log.d("PowerPi", "Turn off " + device.toString());
+                Log.d("PowerPi", "Turn off " + device);
                 control.control(device,false);
                 break;
         }

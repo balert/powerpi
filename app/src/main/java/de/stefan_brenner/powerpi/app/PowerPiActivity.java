@@ -16,12 +16,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PowerPiActivity extends ActionBarActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private SharedPreferences prefs;
     public static String powerPiHost;
     public static int powerPiPort;
-    public static String powerPiObjects;
+    public static String[] powerPiObjects;
 
     public PowerPiActivity() {
 
@@ -38,29 +41,20 @@ public class PowerPiActivity extends ActionBarActivity implements SharedPreferen
             prefs.registerOnSharedPreferenceChangeListener(this);
             powerPiHost = prefs.getString(getString(R.string.PREF_HOSTNAME), "");
             powerPiPort = Integer.parseInt(prefs.getString(getString(R.string.PREF_PORT), "0"));
-            powerPiObjects = prefs.getString(getString(R.string.PREF_OBJECTS), "");
+            powerPiObjects = prefs.getString(getString(R.string.PREF_OBJECTS), "").split(",");
 
             Log.d("pref_hostname",powerPiHost);
 
-            Fragment schreibtischlampe = ControlFragment.newInstance(Device.Schreibtischlampe);
-            Fragment stehlampe = ControlFragment.newInstance(Device.Stehlampe);
-            Fragment ecklampe = ControlFragment.newInstance(Device.Ecklampe);
-
-            Fragment nachttischlampe = ControlFragment.newInstance(Device.Nachttischlampe);
-            Fragment schrank = ControlFragment.newInstance(Device.Schrank);
-            Fragment kugel = ControlFragment.newInstance(Device.Kugel);
-
-            Fragment alles = ControlFragment.newInstance(Device.Alles);
-
             FragmentManager fm = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
-            transaction.add(R.id.fragmentContainer, nachttischlampe);
-            transaction.add(R.id.fragmentContainer, schrank);
-            transaction.add(R.id.fragmentContainer, kugel);
-            transaction.add(R.id.fragmentContainer, schreibtischlampe);
-            transaction.add(R.id.fragmentContainer, stehlampe);
-            transaction.add(R.id.fragmentContainer, ecklampe);
-            transaction.add(R.id.fragmentContainer, alles);
+
+            for(String object : powerPiObjects) {
+                Fragment fragment = ControlFragment.newInstance(object.trim());
+                transaction.add(R.id.fragmentContainer, fragment);
+            }
+
+            //transaction.add(R.id.fragmentContainer, ControlFragment.newInstance("All"));
+
             transaction.commit();
 
         }
@@ -85,7 +79,7 @@ public class PowerPiActivity extends ActionBarActivity implements SharedPreferen
         } else if(key.equals(getString(R.string.PREF_PORT))) {
             powerPiPort = Integer.parseInt(prefs.getString(getString(R.string.PREF_PORT), "0"));
         } else if(key.equals(getString(R.string.PREF_OBJECTS))) {
-            powerPiObjects = prefs.getString(getString(R.string.PREF_OBJECTS), "");
+            powerPiObjects = prefs.getString(getString(R.string.PREF_OBJECTS), "").split(",");
         }
     }
 }
