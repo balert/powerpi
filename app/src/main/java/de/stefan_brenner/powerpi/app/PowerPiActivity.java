@@ -37,7 +37,7 @@ public class PowerPiActivity extends ActionBarActivity implements SharedPreferen
             prefs = PreferenceManager.getDefaultSharedPreferences(this);
             prefs.registerOnSharedPreferenceChangeListener(this);
             powerPiHost = prefs.getString(getString(R.string.PREF_HOSTNAME), "");
-            powerPiPort = Integer.parseInt(prefs.getString(getString(R.string.PREF_PORT), ""));
+            powerPiPort = Integer.parseInt(prefs.getString(getString(R.string.PREF_PORT), "0"));
             powerPiObjects = prefs.getString(getString(R.string.PREF_OBJECTS), "");
 
             Log.d("pref_hostname",powerPiHost);
@@ -83,7 +83,7 @@ public class PowerPiActivity extends ActionBarActivity implements SharedPreferen
         if(key.equals(getString(R.string.PREF_HOSTNAME))){
             powerPiHost = prefs.getString(getString(R.string.PREF_HOSTNAME),"");
         } else if(key.equals(getString(R.string.PREF_PORT))) {
-            powerPiPort = Integer.parseInt(prefs.getString(getString(R.string.PREF_PORT), ""));
+            powerPiPort = Integer.parseInt(prefs.getString(getString(R.string.PREF_PORT), "0"));
         } else if(key.equals(getString(R.string.PREF_OBJECTS))) {
             powerPiObjects = prefs.getString(getString(R.string.PREF_OBJECTS), "");
         }
