@@ -6,5 +6,7 @@
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:onClick="openSettings"
+        app:showAsAction="always" />
 </menu>

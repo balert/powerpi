@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="@string/PREF_HOSTNAME"
+        android:title="PowerPi hostname"
+        android:summary="Set the hostname of your PowerPi."
+        android:inputType="textNoSuggestions"
+        android:defaultValue="pi"/>
+    <EditTextPreference
+        android:key="@string/PREF_PORT"
+        android:title="PowerPi port"
+        android:summary="Set the port of your PowerPi."
+        android:inputType="textNoSuggestions"
+        android:defaultValue="6677" />
+    <EditTextPreference
+        android:key="@string/PREF_OBJECTS"
+        android:title="PowerPi objects"
+        android:summary="Set your configured objects as comma-separated list of names as given in the PowerPi web interface."
+        android:inputType="textNoSuggestions"
+        android:defaultValue="Schreibtischlampe, Ecklampe"
+        android:enabled="false" />
+</PreferenceScreen>

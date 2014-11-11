@@ -39,13 +39,15 @@ public class RadioControl {
         protected Boolean doInBackground(String... strings) {
             try {
                 DatagramSocket socket = new DatagramSocket();
-                InetAddress piAddress = InetAddress.getByName("192.168.178.25");
+                String hostname = PowerPiActivity.powerPiHost;
+                InetAddress piAddress = InetAddress.getByName(hostname);
 
                 String messageStr = strings[0];
 
                 Log.d("RadioControl", messageStr);
 
-                DatagramPacket p = new DatagramPacket(messageStr.getBytes(), messageStr.length(),piAddress,6677);
+                int port = PowerPiActivity.powerPiPort;
+                DatagramPacket p = new DatagramPacket(messageStr.getBytes(), messageStr.length(),piAddress,port);
                 socket.send(p);
                 return true;
             } catch (Exception e) {

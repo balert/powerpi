@@ -5,16 +5,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="de.stefan_brenner.powerpi.app.GlobalState"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".GlobalState"
         android:theme="@style/AppTheme" >
         <activity
             android:name="de.stefan_brenner.powerpi.app.PowerPiActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
-        <!-- android:screenOrientation="portrait"-->
+            android:launchMode="singleTop" >
+
+            <!-- android:screenOrientation="portrait" -->
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="de.stefan_brenner.powerpi.app.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
     </application>
