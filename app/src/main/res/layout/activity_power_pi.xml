@@ -6,10 +6,17 @@
     tools:context="de.stefan_brenner.powerpi.app.PowerPiActivity"
     tools:ignore="MergeRootFrame" >
 
-    <LinearLayout
-        android:id="@+id/fragmentContainer"
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal|top"></LinearLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:id="@+id/fragmentContainer"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal|top"></LinearLayout>
+    </ScrollView>
+
 </FrameLayout>
