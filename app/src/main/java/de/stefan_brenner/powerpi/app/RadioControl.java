@@ -1,8 +1,10 @@
 package de.stefan_brenner.powerpi.app;
 
 import android.os.AsyncTask;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -33,7 +35,6 @@ public class RadioControl {
                 InetAddress piAddress = InetAddress.getByName(hostname);
 
                 String messageStr = strings[0];
-
                 Log.d("RadioControl", messageStr);
 
                 int port = PowerPiActivity.powerPiPort;

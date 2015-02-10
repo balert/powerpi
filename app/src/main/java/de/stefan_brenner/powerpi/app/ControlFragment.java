@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -57,8 +58,10 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+
         if(control == null) {
             System.out.println("no RadioControl");
+            Toast.makeText(this.getActivity().getApplicationContext(),"no RadioControl",Toast.LENGTH_LONG).show();
             return;
         }
 
