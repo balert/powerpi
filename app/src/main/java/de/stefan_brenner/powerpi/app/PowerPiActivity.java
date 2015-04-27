@@ -73,7 +73,7 @@ public class PowerPiActivity extends ActionBarActivity implements SharedPreferen
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
+        Log.d("pref changed","");
         if(key.equals(getString(R.string.PREF_HOSTNAME))){
             powerPiHost = prefs.getString(getString(R.string.PREF_HOSTNAME),"");
         } else if(key.equals(getString(R.string.PREF_PORT))) {
