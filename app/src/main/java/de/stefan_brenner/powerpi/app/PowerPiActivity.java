@@ -32,32 +32,29 @@ public class PowerPiActivity extends ActionBarActivity implements SharedPreferen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(null);
         setContentView(R.layout.activity_power_pi);
 
-        if (savedInstanceState == null) {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(this);
+        powerPiHost = prefs.getString(getString(R.string.PREF_HOSTNAME), "");
+        powerPiPort = Integer.parseInt(prefs.getString(getString(R.string.PREF_PORT), "0"));
+        powerPiObjects = prefs.getString(getString(R.string.PREF_OBJECTS), "").split(",");
 
-            prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            prefs.registerOnSharedPreferenceChangeListener(this);
-            powerPiHost = prefs.getString(getString(R.string.PREF_HOSTNAME), "");
-            powerPiPort = Integer.parseInt(prefs.getString(getString(R.string.PREF_PORT), "0"));
-            powerPiObjects = prefs.getString(getString(R.string.PREF_OBJECTS), "").split(",");
+        Log.d("pref_hostname",powerPiHost);
 
-            Log.d("pref_hostname",powerPiHost);
+        FragmentManager fm = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
 
-            FragmentManager fm = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
-
-            for(String object : powerPiObjects) {
-                Fragment fragment = ControlFragment.newInstance(object.trim());
-                transaction.add(R.id.fragmentContainer, fragment);
-            }
-
-            //transaction.add(R.id.fragmentContainer, ControlFragment.newInstance("All"));
-
-            transaction.commit();
-
+        for(String object : powerPiObjects) {
+            Fragment fragment = ControlFragment.newInstance(object.trim());
+            transaction.add(R.id.fragmentContainer, fragment);
         }
+
+        //transaction.add(R.id.fragmentContainer, ControlFragment.newInstance("All"));
+
+        transaction.commit();
+
     }
 
     @Override
